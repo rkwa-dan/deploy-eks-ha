@@ -13,3 +13,30 @@ module "eks" {
     }
   ]
 }
+
+//node pools config
+
+resource "aws_eks_node_group" "eks-pool-main" {
+  cluster_name    = var.eks-cluster-name
+  node_group_name = "eks-pool-main"
+  node_role_arn   = aws_iam_role.eks-ha.arn
+  subnet_ids      = data.aws_subnet.subnet_ids_eks
+
+  scaling_config {
+    desired_size = var.eks-pool-main-size
+    max_size     = 5
+    min_size     = 1
+  }
+
+  update_config {
+    max_unavailable = 2
+  }
+
+  # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.
+  # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.
+  depends_on = [
+    aws_iam_role_policy_attachment.example-AmazonEKSWorkerNodePolicy,
+    aws_iam_role_policy_attachment.example-AmazonEKS_CNI_Policy,
+    aws_iam_role_policy_attachment.example-AmazonEC2ContainerRegistryReadOnly,
+  ]
+}

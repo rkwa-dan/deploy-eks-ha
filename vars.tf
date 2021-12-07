@@ -40,14 +40,15 @@ variable "vpc-region-list" {
 #  default = element(vpc-region-list[15])
 #}
 
+variable "vpc_id" {
+  default = ""
+}
+
 variable "eks-azs" {
 default = ["eu-west-2c","eu-west-2a" ]
 }
 
 
-variable "eks-cluster-name" {
-  default = "EKS-HA"
-}
 variable "cidr-block" {
   default = "10.10.0.0/16"
 }
