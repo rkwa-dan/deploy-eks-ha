@@ -17,11 +17,11 @@ data "aws_eks_cluster_auth" "eks" {
 // get data list for subnet id's for eks cluster
 
 data "aws_subnet_ids" "subnet_ids_eks" {
-vpc_id = module.vpc.vpc_id
+  vpc_id = module.vpc.vpc_id
 }
 
 data "aws_subnet" "subnet_ids_eks" {
-for_each = data.aws_subnet_ids.subnet_ids_eks.ids
-id       = each.value
+  for_each = data.aws_subnet_ids.subnet_ids_eks.ids
+  id  = each.value
 }
 

@@ -8,24 +8,24 @@ var.region[n] for scalability purposes.
 0  US East (N. Virginia)	  us-east-1
 1  US East (Ohio)	          us-east-2
 2  US West (N. California)	  us-west-1
-3  US West (Oregon)	      us-west-2
+3  US West (Oregon)	          us-west-2
 4  Africa (Cape Town)	      af-south-1
-5  Asia Pacific (Hong Kong)  ap-east-1
+5  Asia Pacific (Hong Kong)   ap-east-1
 6  Asia Pacific (Mumbai) 	  ap-south-1
-7  Asia Pacific (Osaka)	  ap-northeast-3
-8  Asia Pacific (Seoul)	  ap-northeast-2
-9  Asia Pacific (Singapore)  ap-southeast-1
+7  Asia Pacific (Osaka)	      ap-northeast-3
+8  Asia Pacific (Seoul)	      ap-northeast-2
+9  Asia Pacific (Singapore)   ap-southeast-1
 10 Asia Pacific (Sydney)	  ap-southeast-2
-11 Asia Pacific (Tokyo)	  ap-northeast-1
-12 Canada (Central)	      ca-central-1
-13 Europe (Frankfurt)	  eu-central-1
-14 Europe (Ireland)	      eu-west-1
+11 Asia Pacific (Tokyo)	      ap-northeast-1
+12 Canada (Central)	          ca-central-1
+13 Europe (Frankfurt)	      eu-central-1
+14 Europe (Ireland)	          eu-west-1
 15 Europe (London)	          eu-west-2
 16 Europe (Milan)	          eu-south-1
 17 Europe (Paris)	          eu-west-3
 18 Europe (Stockholm)	      eu-north-1
 19 Middle East (Bahrain)	  me-south-1
-20 South America (São Paulo) sa-east-1
+20 South America (São Paulo)  sa-east-1
 */
 
 // define the list of regions as a list/array and refer to the one we want in this instance.
@@ -60,3 +60,13 @@ variable "private-subnets" {
 variable "public-subnets" {
   default  = ["10.10.100.0/24","10.10.200.0/24"]
 }
+
+variable "checkCredsOutput" {
+  default = "$ aws sts get-caller-identity"
+}
+
+variable "connectToEksClusterCommand" {
+  default = "$ aws eks --region region update-kubeconfig --name <cluster_name>"
+#  ${var.eks-cluster-name}"
+}
+
