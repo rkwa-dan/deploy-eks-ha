@@ -65,8 +65,5 @@ variable "checkCredsOutput" {
   default = "$ aws sts get-caller-identity"
 }
 
-variable "connectToEksClusterCommand" {
-  default = "$ aws eks --region region update-kubeconfig --name <cluster_name>"
-#  ${var.eks-cluster-name}"
-}
+
 

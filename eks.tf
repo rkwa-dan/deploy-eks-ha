@@ -21,7 +21,8 @@ resource "aws_eks_node_group" "eks-pool-main" {
   cluster_name    = var.eks-cluster-name
   node_group_name = "eks-pool-main"
   node_role_arn   = aws_iam_role.eks-ha.arn
-  subnet_ids      = data.aws_subnet_ids.subnet_ids_eks.ids
+  subnet_ids      = module.vpc.private_subnets
+#  data.aws_subnet_ids.subnet_ids_eks.ids
 
   scaling_config {
     desired_size = var.eks-pool-main-size
@@ -48,7 +49,8 @@ resource "aws_eks_node_group" "eks-pool-sec" {
   cluster_name    = var.eks-cluster-name
   node_group_name = "eks-pool-sec"
   node_role_arn   = aws_iam_role.eks-ha.arn
-  subnet_ids      = data.aws_subnet_ids.subnet_ids_eks.ids
+#  subnet_ids      = data.aws_subnet_ids.subnet_ids_eks.ids
+  subnet_ids      =  module.vpc.private_subnets
 
   scaling_config {
     desired_size = var.eks-pool-sec-size
